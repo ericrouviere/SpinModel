@@ -626,20 +626,6 @@ function scanAllostericSurface(seq::Sequence,
     return perturbationScan(seq, K, Q, ligs; h_mag, fullScan=false)[:,:,1,:]
 end
 
-#function getAlloHotSpot(seq::Sequence,
-#                        K::Table,
-#                        Q::Settings,
-#                        sites::Sites,
-#                        fields::Fields;
-#                        h_perturb::Number=1)
-#    # return the most sensitive site on the allosteric surface.
-#    ΔG = scanAllostericSurface(seq, K, Q, sites, fields; h_perturb)
-#    ΔG_max, ind = findmax(ΔG)
-#    site = ind[1]
-#    ind[2] == 1 ? field = h_perturb : field = -h_perturb
-#    return ΔG_max, site, field
-#end
-
 function computeAllostery(seq::Sequence,
                           K::Table,
                           Q::Settings,
@@ -781,7 +767,3 @@ function binding2Histogram(bindingEnergies::AbstractArray{T, 3}; # has dims  (po
     bins = getBins(bindingEnergies; N_bins, θ, limits)
     return makeHistogram(bins; N_bins)
 end
-
-
-
-

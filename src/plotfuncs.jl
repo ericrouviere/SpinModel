@@ -206,9 +206,6 @@ Plot the strength of the couplings on the lattice.
 function plotCouplings(seq::Sequence, K::Table, Q::Settings; maxCouplingSize=2, maxSiteSize=1)
     W,L = Q.W,Q.L
     J = seq2J(seq, K)
-  #  J[:,:,2:3] .= -0.1
-  #  J[CartesianIndex(3,L,3)] = 1
-  #  J[CartesianIndex(3,1,2)] = 1
     J_dict = Dict(-1 => ones(W, L+1), 0 => J[:,1:L,2], 1 => J[:,1:L,3])
     fig, ax = subplots(figsize=(4,3))
     see_J!(ax, J_dict; color_sites=false, maxCouplingSize, maxSiteSize)
@@ -216,21 +213,6 @@ function plotCouplings(seq::Sequence, K::Table, Q::Settings; maxCouplingSize=2, 
     return fig
 end
 
-
-#"""
-#Plot Free energy as a function of active site ligand field, h.
-#"""
-#function plotLigScape(seq::Sequence, K::Table, Q::Settings, site::CartesianIndex; h_range=[-2, 4], n=50)
-#    h_list = LinRange(h_range[1], h_range[2], n)
-#    energies = computeLigScape(seq, K, Q, site; h_range, n)
-#    fig, ax = subplots(figsize=(4,3))
-#    fig.subplots_adjust(bottom = 0.2, left = 0.2)
-#    ax.plot(h_list, energies, c="b")
-#    ax.set_xlabel(L"h", fontsize=14)
-#    ax.set_ylabel(L"F", fontsize=14)
-#    return fig
-#end
-#
 
 """
 Plot change in magnetization due to ligand binding.
@@ -471,5 +453,3 @@ function plotHeatMap!(fig, ax, x, y, z;
     clb = fig.colorbar(im, ax=ax)  # Ensure colorbar is associated with specific axes
     return nothing
 end
-
-

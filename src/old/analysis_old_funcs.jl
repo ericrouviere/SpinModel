@@ -240,3 +240,20 @@
 #    end
 #    return binvec
 #end
+
+
+# Moved from src/analysis.jl.
+
+#function getAlloHotSpot(seq::Sequence,
+#                        K::Table,
+#                        Q::Settings,
+#                        sites::Sites,
+#                        fields::Fields;
+#                        h_perturb::Number=1)
+#    # return the most sensitive site on the allosteric surface.
+#    ΔG = scanAllostericSurface(seq, K, Q, sites, fields; h_perturb)
+#    ΔG_max, ind = findmax(ΔG)
+#    site = ind[1]
+#    ind[2] == 1 ? field = h_perturb : field = -h_perturb
+#    return ΔG_max, site, field
+#end

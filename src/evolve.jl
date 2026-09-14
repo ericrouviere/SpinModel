@@ -3,6 +3,49 @@
 
 
 """
+    evolve(seq, K, Q, ligs, assay, N; ζ, ΔT=1)
+
+Single-sequence Metropolis Monte Carlo under the selective pressure `assay`.
+Each of the `N` steps mutates one random position of the sequence to a different
+residue and accepts the mutation with probability `min(1, exp(ζ*(ϕ_mut - ϕ)))`, where
+`ϕ = computeFitness(seq, K, Q, ligs, assay)` and `ζ` is the evolutionary inverse
+temperature (larger `ζ`, stronger selection).
+
+Records the step, fitness and sequence every `ΔT` steps and at the last step, and
+returns `(times, fitnesses, sequences)`. `seq` itself is not modified.
+"""
+function evolve(seq::Sequence, K::Table, Q::Settings, ligs::Ligands, assay::Assay,
+                N::Integer; ζ::Real, ΔT::Integer=1)
+    seq = copy(seq)
+    ϕ = computeFitness(seq, K, Q, ligs, assay)
+    times, fitnesses, sequences = Int[], Float64[], Sequence[]
+    for t in 0:N
+        # recording:
+        if t % ΔT == 0 || t == N
+            push!(times, t)
+            push!(fitnesses, ϕ)
+            push!(sequences, copy(seq))
+        end
+        t == N && break
+
+        # mutation:
+        i, amut = rand(eachindex(seq)), rand(1:(Q.q - 1))
+        awt = seq[i]
+        seq[i] = ((awt - 1 + amut) % Q.q) + 1
+        ϕ_mut = computeFitness(seq, K, Q, ligs, assay)
+
+        # selection:
+        if rand() < exp(ζ * (ϕ_mut - ϕ))
+            ϕ = ϕ_mut
+        else
+            seq[i] = awt
+        end
+    end
+    return times, fitnesses, sequences
+end
+
+
+"""
 Evolve a popluation of sequences under a fluctuating selection.
 Saves numSeqs2Keep from the last half of the trajectory.
 """

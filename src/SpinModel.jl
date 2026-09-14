@@ -43,9 +43,7 @@ export
     seq2J!,
     TransferCache,
     mutantFreeEnergies!,
- #   makeLigandList,
     randSeq,
-    #getJMatrix,
 
     # from energies.jl
     computeFreeEnergies,
@@ -57,13 +55,6 @@ export
     computeBindingRandSeqs,
 
     # from fitness
-#    stability,
-#    specificity,
-#    binding,
-#    doubleBinding,
-#    allostery,
-#    negativeAllostery,
-#    generalSpecificity,
     computeFitness,
     Assay,
     Stability,
@@ -76,8 +67,7 @@ export
     Binding2,
 
     # from evolve.jl
-    #evolve,
-    #evolve2,
+    evolve,
     evolvePop,
     evolvePopStatic,
     evolvePopSecondary,
@@ -87,17 +77,10 @@ export
     evolvePop_saveSeqs,
 
     # from mutate.jl
-    #mutate!,
     mutateAtRate!,
-    #mutateAtRate1!,
 
     # from analysis.jl
     computeMagnetization,
-#    computeCorrelation,
-#    computeCorrelations,
-#    computeOverlaps,
-#    computeEffectiveField,
-   # overlaps,
     computePartRatio,
     computeBindingDMS,
     computeBindingDoubleDMS,
@@ -114,15 +97,12 @@ export
     scanAllostericSurface,
     computeAllostery,
     computeLigScape,
-    #getAlloHotSpot,
     analyseBindingDMS, 
-#    computeEvolvability,
     binBindingSpace,
     getBinnedSeqs,
     getBins,
     makeHistogram,
     binding2Histogram,
- #   computeEvolvabilityBindSpace,
 
     # from ensemble.jl
     evolveEnsemble,
@@ -132,7 +112,6 @@ export
     evolvePop_saveBindingEnsemble,
     evolvePop_saveSeqsEnsemble,
     computeTrajPhenotypesEnsemble,
-    # isTwoStateEnsemble,
     computePartRatioEnsemble,
     computeAllosteryEnsemble,
     computeBindEnergiesEnsemble,
