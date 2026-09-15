@@ -17,15 +17,6 @@ A protein is modeled as a 2d spin-glass lattice of width `W` and length `L+1`. A
 
 SpinModel is not in the Julia General registry, so it installs from its GitHub URL. Pick one of the two options below.
 
-**The repository is private.** You need to be given access on GitHub, and Julia has to be able to log in:
-
-- `git clone` (Option 2) uses your command-line `git`, which already has your GitHub credentials.
-- `Pkg.add` (Option 1) and `Pkg.update` use Julia's built-in git by default. It doesn't see those credentials and fails with `failed to clone ... user cancelled credential request`. Tell Julia to use your command-line `git` instead by adding this line to your shell profile (`~/.zshrc` or `~/.bashrc`):
-  ```bash
-  export JULIA_PKG_USE_CLI_GIT=true
-  ```
-  Or set it inside Julia before calling `Pkg`: `ENV["JULIA_PKG_USE_CLI_GIT"] = "true"`.
-
 ### Option 1: add it as a package
 
 Use this if you only want to use SpinModel from your own scripts. From the Julia REPL:
